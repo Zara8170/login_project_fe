@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginLink } from "../api/socialApi";
 import { logout } from "../redux/loginSlice";
+import { logoutMember } from "../api/memberApi";
 
 const SOCIAL_PROVIDERS = [
   { id: "kakao", name: "카카오톡", color: "#FEE500", textColor: "#3C1E1E" },
@@ -21,6 +22,7 @@ const LoginPage = () => {
   };
 
   const handleLogout = () => {
+    logoutMember();
     dispatch(logout());
   };
 

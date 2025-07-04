@@ -25,10 +25,6 @@ const AUTH_URLS = {
   facebook: "https://www.facebook.com/v12.0/dialog/oauth",
 };
 
-const generateRandomState = () => {
-  return Math.random().toString(36).substring(2, 15);
-};
-
 // 로그인 URL 생성
 export const getLoginLink = (provider) => {
   const url = new URL(AUTH_URLS[provider]);
@@ -36,23 +32,18 @@ export const getLoginLink = (provider) => {
   url.searchParams.append("redirect_uri", REDIRECT_URIS[provider]);
   url.searchParams.append("response_type", "code");
 
-  if (provider === "naver") {
-    const state = generateRandomState();
-    url.searchParams.append("state", state);
-  }
-
   // 필요 시 scope 추가
   if (provider === "google") {
     url.searchParams.append("scope", "profile email");
     url.searchParams.append("access_type", "offline");
   } else if (provider === "facebook") {
     url.searchParams.append("scope", "email");
+  } else if (provider === "github") {
+    url.searchParams.append("scope", "user:email");
   }
 
   return url.toString();
 };
-
-console.log(getLoginLink("naver"));
 
 // 토큰 요청 (백엔드에서 처리)
 export const getAccessToken = async (code, provider) => {
