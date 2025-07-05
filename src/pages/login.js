@@ -10,6 +10,7 @@ const SOCIAL_PROVIDERS = [
   { id: "naver", name: "네이버", color: "#03C75A", textColor: "#fff" },
   { id: "github", name: "GitHub", color: "#000000", textColor: "#fff" },
   { id: "facebook", name: "Facebook", color: "#1877F2", textColor: "#fff" },
+  {},
 ];
 
 const LoginPage = () => {
